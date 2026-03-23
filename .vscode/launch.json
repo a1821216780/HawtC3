@@ -1,0 +1,65 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "Debug HawtC3 (No Build)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\build\\debug\\HawtC3.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}\\build\\debug",
+            "environment": [],
+            "console": "externalTerminal"
+        },
+        {
+            "name": "Debug HawtC3 (Build)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\build\\debug\\HawtC3.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}\\build\\debug",
+            "environment": [],
+            "console": "externalTerminal",
+            "preLaunchTask": "C/C++: Build Debug"
+        },
+        {
+            "name": "Run HawtC3 Release",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\build\\release\\HawtC3.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}\\build\\release",
+            "environment": [],
+            "console": "externalTerminal",
+            "preLaunchTask": "C/C++: Build Release"
+        },
+        {
+            "name": "Run HawtC3 Release Extreme",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\build\\release_extreme\\HawtC3.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}\\build\\release_extreme",
+            "environment": [],
+            "console": "externalTerminal",
+            "preLaunchTask": "C/C++: Build Release Extreme"
+        },
+        {
+            "name": "Run Yaml Unit Tests",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\build\\test\\YamlTests.exe",
+            "args": ["--gtest_color=yes"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "C/C++: Build UNIT TEST"
+        },
+    ]
+}

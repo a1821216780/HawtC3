@@ -1,0 +1,41 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "E:/Qahse/Qahse/Qahse/Core",
+                "E:/Qahse/Qahse",
+                "E:/Qahse/Qahse/include_headers/Eigen3",
+                "E:/Qahse/Qahse/include_headers/Chrono",
+                "E:/Qahse/Qahse/include_headers",
+                "E:/Qahse/Qahse/include_headers/OpenBlas/include",
+                "E:/Qahse/Qahse/src",
+                "E:/Qahse/Qahse/Project/OpenXLSX-master/OpenXLSX",
+                "E:/Qahse/Qahse/Project/OpenXLSX-master/build/OpenXLSX",
+                "E:/Qahse/Qahse/Project/OpenXLSX-master/OpenXLSX/headers",
+                "E:/Qahse/Qahse/Project/spectra-master/include",
+                "C:/Program Files (x86)/Intel/oneAPI/mkl/latest/include",
+                "${workspaceFolder}/include",
+                "E:/Qahse/Qahse/Qahse/Core"
+            ],
+            // "defines" 字段用于指定预处理器宏定义（宏常量），这些宏会在编译时传递给 C/C++ 编译器，等价于在编译命令行中使用 -D 参数。
+            // 你可以在此数组中定义任意宏，例如 "DEBUG", "VERSION=2" 等。
+            // 这些宏可以用于条件编译、控制代码行为或传递配置信息。
+            // 示例：
+            // "defines": [ "DEBUG", "PLATFORM_WINDOWS", "VERSION=2" ]
+            "defines": [
+                "NOMINMAX",
+                "UNICODE",
+                "_UNICODE",
+                "DEBUG"
+            ],
+            "windowsSdkVersion": "10.0.26100.0",
+            "compilerPath": "D:/Program Files/Microsoft Visual Studio/18/Enterprise/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,47 @@
+// HawtC3.rc  –  Windows resource script
+// Embeds version information and application icon into HawtC3.exe
+//
+// Build:  rc.exe /fo build\HawtC3.res src\HawtC3.rc
+// Then link build\HawtC3.res together with the object files.
+
+#include <winver.h>
+#include "src\version.h"
+
+// ─── Application Icon ────────────────────────────────────
+// Place your .ico file at src\HawtC3.ico (or adjust the path below).
+// IDI_ICON1 is the main icon shown in Explorer / taskbar.
+IDI_ICON1  ICON  "resources\\HawtC3.ico"
+
+// ─── Version Information Block ───────────────────────────
+VS_VERSION_INFO VERSIONINFO
+    FILEVERSION     VER_FILE_VERSION
+    PRODUCTVERSION  VER_PRODUCT_VERSION
+    FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+    FILEFLAGS       VS_FF_DEBUG
+#else
+    FILEFLAGS       0x0L
+#endif
+    FILEOS          VOS_NT_WINDOWS32
+    FILETYPE        VFT_APP
+    FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"          // Language: US English, Charset: Unicode
+        BEGIN
+            VALUE "CompanyName",      VER_COMPANY_NAME
+            VALUE "FileDescription",  VER_FILE_DESCRIPTION
+            VALUE "FileVersion",      VER_FILE_VERSION_STR
+            VALUE "InternalName",     VER_INTERNAL_NAME
+            VALUE "LegalCopyright",   VER_COPYRIGHT
+            VALUE "OriginalFilename", VER_ORIGINAL_FILENAME
+            VALUE "ProductName",      VER_PRODUCT_NAME
+            VALUE "ProductVersion",   VER_PRODUCT_VERSION_STR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1200   // English, Unicode
+    END
+END
