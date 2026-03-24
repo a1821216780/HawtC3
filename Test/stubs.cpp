@@ -1,7 +1,7 @@
 // stubs.cpp - 为单元测试提供最小化的依赖桩函数
 // 替代 LogHelper.cpp 及其复杂依赖链
 
-#include "../../../src/IO/Log/LogHelper.h"
+#include "../src/IO/Log/LogHelper.h"
 #include <iostream>
 #include <gtest/gtest.h>
 
@@ -37,12 +37,12 @@ namespace Log {
 		std::cerr << "[TEST-ErrorLog] " << FunctionName << ": " << message << std::endl;
 	}
 
-	void LogHelper::WarnLog(const std::string& debugmessage, const std::string& relasemessage,
+	void LogHelper::WarnLog(const std::string& debugmessage, const std::string& releasemessage,
 		ConsoleColor color, int outtime, const std::string& functionname) {
 		std::cerr << "[TEST-WarnLog] " << functionname << ": " << debugmessage << std::endl;
 	}
 
-	void LogHelper::WriteLog(const std::string& message, const std::string& relaesemes,
+	void LogHelper::WriteLog(const std::string& message, const std::string& releasemes,
 		bool show_title, const std::string& title, ConsoleColor color,
 		bool newline, int leval) {
 		// no-op in test

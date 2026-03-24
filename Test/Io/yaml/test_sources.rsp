@@ -1,6 +1,0 @@
-"Test\Io\yaml\test_main.cpp"
-"Test\Io\yaml\test_yaml.cpp"
-"Test\Io\yaml\test_yaml_type_converter.cpp"
-"Test\Io\yaml\stubs.cpp"
-"src\IO\Yaml\Yaml.cpp"
-"src\IO\Yaml\YamlTypeConverter.cpp"

@@ -50,16 +50,28 @@
             "preLaunchTask": "C/C++: Build Release Extreme"
         },
         {
-            "name": "Run Yaml Unit Tests",
+            "name": "Run Unit Tests (No Build)",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\build\\test\\YamlTests.exe",
+            "program": "${workspaceFolder}\\build\\test\\UnitTests.exe",
             "args": ["--gtest_color=yes"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "console": "integratedTerminal",
-            "preLaunchTask": "C/C++: Build UNIT TEST"
+            "console": "externalTerminal",
+
+        },
+            {
+            "name": "Run Unit Tests (Build)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\build\\test\\UnitTests.exe",
+            "args": ["--gtest_color=yes"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "externalTerminal",
+            "preLaunchTask": "C/C++: Build Unit Tests"//要和tasks.json里对应的label一致
         },
     ]
 }

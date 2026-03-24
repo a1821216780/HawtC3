@@ -1,7 +1,10 @@
-"Test\Io\yaml\test_main.cpp"
-"Test\Io\yaml\stubs.cpp"
+"Test\test_main.cpp"
+"Test\stubs.cpp"
+
 "Test\Io\yaml\test_yaml.cpp"
 "Test\Io\yaml\test_yaml_type_converter.cpp"
+
+
 "Test\Io\io\test_string_helper.cpp"
 "Test\Io\io\test_extensions.cpp"
 "Test\Io\io\test_other_helper.cpp"
