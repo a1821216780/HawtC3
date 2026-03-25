@@ -31,10 +31,44 @@ namespace HawtC3::IO::IO
 	{
 	public:
 		static std::string ToUpper(const std::string& str);
+		static void ToUpper(std::string& str);
+
 		static std::string ToLower(const std::string& str);
+		static void ToLower(std::string& str);
+
 		static bool IsPalindrome(const std::string& str);
+
 		static std::vector<std::string> Split(const std::string& str, char delimiter);
+		static std::vector<std::string> Split(const std::string& str, const char* delimiter);
+
+		static std::string Trim(const std::string& str);
+		static std::string TrimStart(const std::string& str);
+		static std::string TrimEnd(const std::string& str);
+
+
+
+
+		static std::string Replace(const std::string& str, const std::string& oldstr, const std::string& newstr);
+		static std::string Replace(const std::string& str, const char& oldstr, const char& newstr);
+		static std::string Replace(const std::string& str, const char& oldstr, const std::string& newstr);
+		static std::string Replace(const std::string& str, const std::string& oldstr, const char& newstr);
+
+		static std::string RemoveNull(const std::vector<std::string>& str) 
+		{
+			std::string result;
+			for (const auto& s : str) {
+				if (!s.empty()) {
+					result += s;
+				}
+			}
+			return result;
+
+		}
+
+
 		static bool StringToBool(const std::string& str);
+		static std::vector<std::string> ReadAllLines(const std::string& path);
+		static void WriteAllLines(const std::string& path, const std::vector<std::string>& lines);
 	};
 }
 #endif // STRINGHELPER_H

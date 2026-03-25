@@ -51,7 +51,7 @@ namespace HawtC3 {
                 //fftw_complex* out = fftw_malloc(sizeof(fftw_complex) * n);
                 fftw_complex* out = static_cast<fftw_complex*>(fftw_malloc(sizeof(fftw_complex) * n));
                 if (!out) {
-                    throw std::runtime_error("FFTW内存分配失败");
+                    LogHelper::ErrorLog("FFTW内存分配失败");
                 }
 
                 fftw_plan plan;
@@ -64,7 +64,7 @@ namespace HawtC3 {
 
                 if (!plan) {
                     fftw_free(out);
-                    throw std::runtime_error("FFTW计划创建失败");
+                    LogHelper::ErrorLog("FFTW计划创建失败");
                 }
 
                 // 执行FFT
@@ -102,7 +102,7 @@ namespace HawtC3 {
                 fftwf_complex* out = reinterpret_cast<fftwf_complex*>(fftw_malloc(sizeof(fftw_complex) * n));
 
                 if (!out) {
-                    throw std::runtime_error("FFTW内存分配失败");
+                    LogHelper::ErrorLog("FFTW内存分配失败");
                 }
 
                 fftwf_plan plan;
@@ -115,7 +115,7 @@ namespace HawtC3 {
 
                 if (!plan) {
                     fftwf_free(out);
-                    throw std::runtime_error("FFTW计划创建失败");
+                    LogHelper::ErrorLog("FFTW计划创建失败");
                 }
 
                 // 执行FFT

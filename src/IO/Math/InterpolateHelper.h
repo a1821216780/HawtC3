@@ -172,6 +172,7 @@ namespace HawtC3::IO::Math
 			}
 			default:
 				HawtC3::IO::Log::LogHelper::ErrorLog("Unknown interpolation type");
+				return T();
 			}
 		}
 
@@ -203,6 +204,7 @@ namespace HawtC3::IO::Math
 			}
 			default:
 				HawtC3::IO::Log::LogHelper::ErrorLog("Unknown interpolation type");
+				return T();
 			}
 		}
 
@@ -246,6 +248,7 @@ namespace HawtC3::IO::Math
 			}
 			default:
 				HawtC3::IO::Log::LogHelper::ErrorLog("Unknown interpolation type");
+				return std::vector<T>();
 			}
 		}
 
@@ -287,6 +290,7 @@ namespace HawtC3::IO::Math
 			}
 			default:
 				HawtC3::IO::Log::LogHelper::ErrorLog("Unknown interpolation type");
+				return std::vector<T>();
 			}
 		}
 
@@ -501,6 +505,7 @@ namespace HawtC3::IO::Math
 			}
 			default:
 				HawtC3::IO::Log::LogHelper::ErrorLog("Unknown interpolation type");
+				return T();
 			}
 		}
 
@@ -542,6 +547,7 @@ namespace HawtC3::IO::Math
 			}
 			default:
 				HawtC3::IO::Log::LogHelper::ErrorLog("Unknown interpolation type");
+				return T();
 			}
 		}
 
@@ -699,6 +705,7 @@ namespace HawtC3::IO::Math
 			}
 			default:
 				HawtC3::IO::Log::LogHelper::ErrorLog("Unknown interpolation type");
+				return T();
 			}
 		}
 
@@ -735,7 +742,9 @@ namespace HawtC3::IO::Math
 				return interp(x1, y1);
 			}
 			default:
+
 				HawtC3::IO::Log::LogHelper::ErrorLog("Unknown interpolation type");
+				return T();
 			}
 		}
 

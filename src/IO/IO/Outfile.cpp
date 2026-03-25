@@ -64,7 +64,7 @@ OutFile::OutFile(const std::string& path, int decimalPlaces, int Scientific)
 
 		_writer = std::make_unique<std::ofstream>(finalPath);
 		if (!_writer->is_open() || !_writer->good()) {
-			throw std::runtime_error("无法打开文件: " + finalPath);
+			LogHelper::ErrorLog("无法打开文件: " + finalPath);
 		}
 	}
 	catch (const std::exception& e) {
@@ -73,7 +73,7 @@ OutFile::OutFile(const std::string& path, int decimalPlaces, int Scientific)
 	}
 
 	if (!_writer) {
-		throw std::runtime_error("读写器没有初始化");
+		LogHelper::ErrorLog("读写器没有初始化");
 	}
 
 	// 添加到全局文件列表
@@ -316,6 +316,8 @@ void OutFile::WriteLine(const std::vector<std::vector<double>>& message) {
 	WriteLine(eigenMatrix);
 }
 
+/// @brief 关闭文件流并设置是否从全局文件列表中移除当前文件流对象
+/// @param remove 是否从文件流当中删除当前文件流对象，默认为true
 void OutFile::Outfinish(bool remove) {
 	if (_writer && _writer->is_open()) {
 		_writer->close();

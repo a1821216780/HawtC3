@@ -108,8 +108,6 @@ int main(int argc, char *argv[])
     std::setlocale(LC_ALL, ".UTF-8");
 
     LogHelper::DisplayInformation();
-    
-
 
     std::printf("你好，世界！\n");
     Console::SetTitle("HawtC3 Sim");
