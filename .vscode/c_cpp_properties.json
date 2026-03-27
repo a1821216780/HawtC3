@@ -28,12 +28,13 @@
                 "NOMINMAX",
                 "UNICODE",
                 "_UNICODE",
-                "DEBUG"
+                "DEBUG",
+                "EIGEN_USE_MKL_ALL"
             ],
             "windowsSdkVersion": "10.0.26100.0",
             "compilerPath": "D:/Program Files/Microsoft Visual Studio/18/Enterprise/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe",
             "cStandard": "c17",
-            "cppStandard": "c++17",
+            "cppStandard": "c++20",
             "intelliSenseMode": "windows-msvc-x64"
         }
     ],
