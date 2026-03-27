@@ -111,7 +111,7 @@ foreach ($sz in $sizes) {
 }
 
 # ── Write ICO file ──
-$icoPath = 'E:\HawtC3\src\HawtC3.ico'
+$icoPath = 'E:\Qahse\src\Qahse.ico'
 $fs = [System.IO.File]::Create($icoPath)
 $bw = New-Object System.IO.BinaryWriter($fs)
 
@@ -155,7 +155,7 @@ Write-Host "Icon created: $icoPath ($fileSize bytes)"
 Write-Host "Sizes: $($sizes -join ', ') px"
 
 # ── Also generate 512x512 PNG ──
-$pngPath = 'E:\HawtC3\src\HawtC3_512.png'
+$pngPath = 'E:\Qahse\src\Qahse_512.png'
 $pngBmp = Draw-WindTurbine 512
 $pngBmp.Save($pngPath, [System.Drawing.Imaging.ImageFormat]::Png)
 $pngBmp.Dispose()

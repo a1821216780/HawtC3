@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<VTKFile byte_order="LittleEndian" type="UnstructuredGrid" version="0.1">
+<UnstructuredGrid>
+<Piece NumberOfCells="4" NumberOfPoints="9">
+<PointData>
+</PointData>
+<CellData>
+<DataArray Name="MaterialId" format="ascii" type="Float64">
+4 4 4 4 
+</DataArray>
+<DataArray Name="FiberAngle" format="ascii" type="Float64">
+0 0 0 0 
+</DataArray>
+</CellData>
+<Points>
+<DataArray NumberOfComponents="3" format="ascii" type="Float64">
+0.1 0 0 0.05 0 0 0 0 0 0.1 0.05 0 0.05 0.05 0 0 0.05 0 0.1 0.1 0 0.05 0.1 0 0 0.1 0 
+</DataArray>
+</Points>
+<Cells>
+<DataArray Name="connectivity" format="ascii" type="Int64">
+0 3 4 1 1 4 5 2 3 6 7 4 4 7 8 5 
+</DataArray>
+<DataArray Name="offsets" format="ascii" type="Int64">
+4 8 12 16 
+</DataArray>
+<DataArray Name="types" format="ascii" type="Int8">
+9 9 9 9 
+</DataArray>
+</Cells>
+</Piece>
+</UnstructuredGrid>
+</VTKFile>

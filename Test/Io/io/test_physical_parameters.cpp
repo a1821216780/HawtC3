@@ -4,7 +4,7 @@
 #include <limits>
 #include "../../../src/IO/IO/PhysicalParameters.h"
 
-using namespace HawtC3::IO::IO;
+using namespace Qahse::IO::IO;
 using phy = PhysicalParameters;
 
 // ============================================================================

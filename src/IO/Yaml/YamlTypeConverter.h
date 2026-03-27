@@ -2,7 +2,7 @@
 //LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,赵子祯
 //
-//    This file is part of HawtC3.IO.Yaml
+//    This file is part of Qahse.IO.Yaml
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@
 #include <type_traits>
 #include <Eigen/Dense>
 
-namespace HawtC3 {
+namespace Qahse {
 namespace IO {
 namespace Yaml {
 
@@ -221,6 +221,6 @@ namespace Yaml {
 
 } // namespace Yaml
 } // namespace IO
-} // namespace HawtC3
+} // namespace Qahse
 
 #endif // YAML_TYPE_CONVERTER_H

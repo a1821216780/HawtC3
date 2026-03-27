@@ -6,7 +6,7 @@
 #include <Eigen/Dense>
 #include "../../../src/IO/IO/MSExcel.h"
 
-using namespace HawtC3::IO::IO;
+using namespace Qahse::IO::IO;
 namespace fs = std::filesystem;
 
 // RAII 临时 Excel 文件助手

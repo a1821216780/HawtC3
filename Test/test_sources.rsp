@@ -19,6 +19,8 @@
 "Test\Io\math\test_math_helper.cpp"
 "Test\Io\math\test_frequence_helper.cpp"
 "Test\Io\math\test_interpolate_helper.cpp"
+"Test\PcsL\test_pcsl_clt_subs.cpp"
+"Test\PcsL\test_pcsl_clt_run.cpp"
 "src\IO\Yaml\Yaml.cpp"
 "src\IO\Yaml\YamlTypeConverter.cpp"
 "src\IO\IO\StringHelper.cpp"

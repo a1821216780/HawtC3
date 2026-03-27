@@ -4,7 +4,7 @@
 #include <vector>
 #include "../../../src/IO/IO/StringHelper.h"
 
-using namespace HawtC3::IO::IO;
+using namespace Qahse::IO::IO;
 
 // ============================================================================
 // ToUpper

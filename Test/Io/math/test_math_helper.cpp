@@ -7,7 +7,7 @@
 #include <Eigen/Dense>
 #include "../../../src/IO/Math/MathHelper.h"
 
-using namespace HawtC3::IO::Math;
+using namespace Qahse::IO::Math;
 
 // ============================================================================
 // RandomSeed 类测试

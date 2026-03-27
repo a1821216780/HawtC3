@@ -2,7 +2,7 @@
 //LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,赵子祯
 //
-//    This file is part of HawtC3.IO.Log.
+//    This file is part of Qahse.IO.Log.
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -32,9 +32,9 @@
 #include "../Log/LogHelper.h"
 #include "OtherHelper.h"
 
-using namespace HawtC3::IO::Interface;
+using namespace Qahse::IO::Interface;
 
-namespace HawtC3::IO::IO
+namespace Qahse::IO::IO
 {
 	/**
 	 * @brief 表示用于将数据写入流的输出文件，支持各种格式化选项。

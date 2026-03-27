@@ -3,7 +3,7 @@
 //LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,赵子祯
 //
-//    This file is part of HawtC3.IO.Math
+//    This file is part of Qahse.IO.Math
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@
 
 
 
-namespace HawtC3::IO::IO
+namespace Qahse::IO::IO
 {
 
 	class PhysicalParameters
@@ -212,6 +212,6 @@ namespace HawtC3::IO::IO
 		inline static constexpr    const double MNtoN = 1000000;
 	};
 
-} // namespace HawtC3::IO::Math
+} // namespace Qahse::IO::Math
 
 #endif // PhysicalParameters_H

@@ -7,7 +7,7 @@
 #include <ctime>
 #include "../../../src/IO/IO/OtherHelper.h"
 
-using namespace HawtC3::IO::IO;
+using namespace Qahse::IO::IO;
 namespace fs = std::filesystem;
 
 // ============================================================================
@@ -20,7 +20,7 @@ TEST(OtherHelperTest, FormortPath_ReturnsAbsolute) {
 }
 
 TEST(OtherHelperTest, FormortPath_AbsoluteUnchanged) {
-	std::string input = "E:\\HawtC3\\src\\main.cpp";
+	std::string input = "E:\\Qahse\\src\\main.cpp";
 	std::string result = OtherHelper::FormortPath(input);
 	EXPECT_TRUE(fs::path(result).is_absolute());
 }
@@ -57,11 +57,11 @@ TEST(OtherHelperTest, FindBestMatch_EmptyList) {
 // ============================================================================
 
 TEST(OtherHelperTest, GetCurrentProjectName) {
-	EXPECT_EQ(OtherHelper::GetCurrentProjectName(), "HawtC3");
+	EXPECT_EQ(OtherHelper::GetCurrentProjectName(), "Qahse");
 }
 
 TEST(OtherHelperTest, GetCurrentExeName) {
-	EXPECT_EQ(OtherHelper::GetCurrentExeName(), "HawtC3.exe");
+	EXPECT_EQ(OtherHelper::GetCurrentExeName(), "Qahse.exe");
 }
 
 

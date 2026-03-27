@@ -1,0 +1,20 @@
+----------! OpenWECD.HawtC2 Log file. !----------
+[Message]: 许可证授权文件正确！
+OpenWECD.HawtC2 - Tel:13935201274  E:1821216780@qq.com http://www.hawtc.cn/
+HawtC2 Vision:V2.0.016_Release_x64,BuildAt: 07/04/2025 02:25 MathACC:SIMD_by赵子祯
+ > Publish: Powered by Key Laboratory of Jiangsu province high tech design @Tg Team
+ > Licensd: 超级用户 - Copyright (c)ZHAO ZIZHEN Lic at 2025-07-04 
+[Message]: Cant find Native acc
+[Message]: Cant find MKL acc
+[Message]: Cant find OpenBLAS acc
+[Message]: Cant find CUDA acc
+------------------------------------------------------------------------------------
+! The Analysis:复合材料叶片截面属性示例
+------------------------------------------------------------------------------------
+[Message]: 文件拓展名称为空 ,我们将增加拓展名称后缀 
+[Message]: :当前文件：./Result1/不存在！,但您设置了不报错且不展示错误的命令，请检查路径和设置，即将更换其他路径寻找该文件！
+[Message]: The program will check lic!
+Running PcsL.FEM 
+正在输出VTK文件
+正在输出Catch文件
+HawtC2 Run completed Normaly!

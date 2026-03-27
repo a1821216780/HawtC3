@@ -2,7 +2,7 @@
 // LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,赵子祯
 //
-//    This file is part of HawtC3.IO.Log.
+//    This file is part of Qahse.IO.Log.
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -48,11 +48,11 @@
 #include <unistd.h>
 #endif
 
-using namespace HawtC3::IO::System;
+using namespace Qahse::IO::System;
 
-using HawtC3::IO::Interface::IOutFile;
+using Qahse::IO::Interface::IOutFile;
 
-namespace HawtC3
+namespace Qahse
 {
 	namespace IO
 	{
@@ -220,7 +220,7 @@ namespace HawtC3
 				/// #endif
 				///
 				/// // 控制台输出示例：
-				/// // HawtC3.ProjectName - Tel:13935201274  E:1821216780@qq.com http://www.HawtC.cn
+				/// // Qahse.ProjectName - Tel:13935201274  E:1821216780@qq.com http://www.HawtC.cn
 				/// // ************************************************************************************
 				/// // ProjectName Vision:VX.X.X_Release,BuildAt: 2025-08-09 Math:MKL
 				/// //  > Publish: Powered by Key Laboratory of Jiangsu province high tech design @Tg Team
@@ -1030,6 +1030,6 @@ namespace HawtC3
 
 		} // namespace Log
 	} // namespace IO
-} // namespace HawtC3
+} // namespace Qahse
 
-#endif // !HawtC3_IO_LOG_LOGHELPER_H
+#endif // !Qahse_IO_LOG_LOGHELPER_H

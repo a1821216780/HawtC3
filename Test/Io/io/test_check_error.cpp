@@ -6,14 +6,14 @@
 #include <fstream>
 #include "../../../src/IO/IO/CheckError.h"
 
-using namespace HawtC3::IO::IO;
+using namespace Qahse::IO::IO;
 namespace fs = std::filesystem;
 
 /// 创建临时文件，测试结束后自动删除
 class TempFile {
 public:
 	explicit TempFile(const std::string& name, const std::string& content = "") {
-		path_ = (fs::temp_directory_path() / ("hawtc3_test_" + name)).string();
+		path_ = (fs::temp_directory_path() / ("Qahse_test_" + name)).string();
 		std::ofstream f(path_);
 		f << content;
 		f.close();
@@ -30,7 +30,7 @@ private:
 class TempDir {
 public:
 	explicit TempDir(const std::string& name) {
-		path_ = (fs::temp_directory_path() / ("hawtc3_test_dir_" + name)).string();
+		path_ = (fs::temp_directory_path() / ("Qahse_test_dir_" + name)).string();
 		fs::create_directories(path_);
 	}
 	~TempDir() {
@@ -61,13 +61,13 @@ TEST(CheckErrorTest, Filexists_NonExistingFile) {
 // ============================================================================
 
 TEST(CheckErrorTest, CheckPath_AddsExtension) {
-	std::string path = (fs::temp_directory_path() / "hawtc3_test_noext").string();
+	std::string path = (fs::temp_directory_path() / "Qahse_test_noext").string();
 	CheckError::CheckPath(path, ".txt", false);
 	EXPECT_EQ(path.substr(path.size() - 4), ".txt");
 }
 
 TEST(CheckErrorTest, CheckPath_CorrectExtension) {
-	std::string path = (fs::temp_directory_path() / "hawtc3_test_file.txt").string();
+	std::string path = (fs::temp_directory_path() / "Qahse_test_file.txt").string();
 	std::string original = path;
 	CheckError::CheckPath(path, ".txt", false);
 	EXPECT_EQ(path, original);
@@ -79,7 +79,7 @@ TEST(CheckErrorTest, CheckPath_CorrectExtension) {
 // ============================================================================
 
 TEST(CheckErrorTest, CheckDir_CreateMissing) {
-	std::string dir = (fs::temp_directory_path() / "hawtc3_test_newdir_ckdir").string();
+	std::string dir = (fs::temp_directory_path() / "Qahse_test_newdir_ckdir").string();
 	if (fs::exists(dir)) fs::remove_all(dir);
 
 	CheckError::CheckDir(dir, true);

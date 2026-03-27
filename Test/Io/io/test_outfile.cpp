@@ -7,15 +7,15 @@
 #include "../../../src/IO/IO/Outfile.h"
 #include "../../../src/IO/Log/LogHelper.h"
 
-using namespace HawtC3::IO::IO;
-using namespace HawtC3::IO::Log;
+using namespace Qahse::IO::IO;
+using namespace Qahse::IO::Log;
 namespace fs = std::filesystem;
 
 /// 临时输出文件 RAII 清理
 class TempOutPath {
 public:
 	explicit TempOutPath(const std::string& name) {
-		path_ = (fs::temp_directory_path() / ("hawtc3_test_" + name)).string();
+		path_ = (fs::temp_directory_path() / ("Qahse_test_" + name)).string();
 	}
 	~TempOutPath() {
 		if (fs::exists(path_)) fs::remove(path_);
@@ -154,7 +154,7 @@ TEST_F(OutFileTest, GetFilename) {
 // ============================================================================
 
 TEST_F(OutFileTest, Outfinish_Remove) {
-	std::string path = (fs::temp_directory_path() / "hawtc3_test_outfinish_rm.3zout").string();
+	std::string path = (fs::temp_directory_path() / "Qahse_test_outfinish_rm.3zout").string();
 	{
 		OutFile out(path);
 		out.WriteLine("test");

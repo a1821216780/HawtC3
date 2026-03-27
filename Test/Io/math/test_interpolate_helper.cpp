@@ -5,7 +5,7 @@
 #include <Eigen/Dense>
 #include "../../../src/IO/Math/InterpolateHelper.h"
 
-using namespace HawtC3::IO::Math;
+using namespace Qahse::IO::Math;
 
 // ============================================================================
 // 1D 线性插值 - Interp1DL (vector)

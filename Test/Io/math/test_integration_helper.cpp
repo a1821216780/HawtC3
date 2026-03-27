@@ -6,7 +6,7 @@
 #include <Eigen/Dense>
 #include "../../../src/IO/Math/IntegrationHelper.h"
 
-using namespace HawtC3::IO::Math;
+using namespace Qahse::IO::Math;
 
 // ============================================================================
 // Trapz - 双精度数组版本

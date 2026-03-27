@@ -1,4 +1,4 @@
-namespace HawtC3::AeroL
+namespace Qahse::AeroL
 {
     enum class AER_Type {
         None=0,
@@ -20,4 +20,4 @@ namespace HawtC3::AeroL
         FireSuppressionSystem,
         SafetyEquipment
     };
-}// namespace HawtC3::AeroL
+}// namespace Qahse::AeroL

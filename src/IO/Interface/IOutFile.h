@@ -2,7 +2,7 @@
 //LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,������
 //
-//    This file is part of HawtC3.IO.Log.
+//    This file is part of Qahse.IO.Log.
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@
 #include <vector>
 #include <Eigen/Dense>
 
-namespace HawtC3 {
+namespace Qahse {
 	namespace IO {
 		namespace Interface {
 
@@ -235,6 +235,6 @@ namespace HawtC3 {
 
 		} // namespace Interface1
 	} // namespace IO
-} // namespace HawtC3
+} // namespace Qahse
 
 #endif // IOUTFILE_H

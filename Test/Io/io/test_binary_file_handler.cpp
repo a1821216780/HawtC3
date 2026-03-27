@@ -7,7 +7,7 @@
 #include <Eigen/Dense>
 #include "../../../src/IO/IO/BinaryFileHandler.h"
 
-using namespace HawtC3::IO::IO;
+using namespace Qahse::IO::IO;
 namespace fs = std::filesystem;
 
 // RAII 临时文件助手

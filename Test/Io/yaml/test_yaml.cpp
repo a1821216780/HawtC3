@@ -4,7 +4,7 @@
 #include <fstream>
 #include "../../../src/IO/Yaml/Yaml.h"
 
-using namespace HawtC3::IO::Yaml;
+using namespace Qahse::IO::Yaml;
 namespace fs = std::filesystem;
 
 // ============================================================================
@@ -15,7 +15,7 @@ namespace fs = std::filesystem;
 class TempYamlFile {
 public:
 	explicit TempYamlFile(const std::string& content, const std::string& name = "test.yml") {
-		path_ = (fs::temp_directory_path() / ("hawtc3_test_" + name)).string();
+		path_ = (fs::temp_directory_path() / ("Qahse_test_" + name)).string();
 		std::ofstream f(path_);
 		f << content;
 		f.close();
@@ -289,7 +289,7 @@ TEST(YMLTest, AddYAML) {
 // ============================================================================
 
 TEST(YMLTest, SaveAndLoad) {
-	std::string tmpPath = (fs::temp_directory_path() / "hawtc3_test_save.yml").string();
+	std::string tmpPath = (fs::temp_directory_path() / "Qahse_test_save.yml").string();
 
 	// 保存
 	{

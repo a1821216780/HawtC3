@@ -2,7 +2,7 @@
 //LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,赵子祯
 //
-//    This file is part of HawtC3.IO.Math
+//    This file is part of Qahse.IO.Math
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
 #include <Eigen/Dense>
 #include <stdexcept>
 
-namespace HawtC3 {
+namespace Qahse {
     namespace IO {
         namespace Math {
 
@@ -196,4 +196,4 @@ namespace HawtC3 {
 
         } // namespace Math
     } // namespace IO
-} // namespace HawtC3
+} // namespace Qahse

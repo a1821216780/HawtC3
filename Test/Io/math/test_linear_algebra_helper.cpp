@@ -5,7 +5,7 @@
 #include <Eigen/Dense>
 #include "../../../src/IO/Math/LinearAlgebraHelper.h"
 
-using namespace HawtC3::IO::Math;
+using namespace Qahse::IO::Math;
 using LA = LinearAlgebraHelper;
 
 // ============================================================================

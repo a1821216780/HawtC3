@@ -6,7 +6,7 @@
 #include <Eigen/Dense>
 #include "../../../src/IO/Math/FrequenceHelper.h"
 
-using namespace HawtC3::IO::Math;
+using namespace Qahse::IO::Math;
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846

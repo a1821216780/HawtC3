@@ -3,7 +3,7 @@
 //LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,赵子祯
 //
-//    This file is part of HawtC3.IO.
+//    This file is part of Qahse.IO.
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@
 #include <tuple>
 #include <iostream>
 
-namespace HawtC3::IO::IO {
+namespace Qahse::IO::IO {
 
 	/// <summary>
 	/// Provides utility methods for working with time and date-related operations.
@@ -169,6 +169,6 @@ namespace HawtC3::IO::IO {
 		static std::string FormatWithLeadingZeros(int value, int width);
 	};
 
-} // namespace HawtC3::IO::Math
+} // namespace Qahse::IO::Math
 
 #endif // TIMESHELPER_H

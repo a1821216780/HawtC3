@@ -12,15 +12,17 @@
 #include "io/System/Console.h"
 #include "io/IO/TimesHelper.h"
 #include "IO/Log/LogHelper.h"
+#include "IO/IO/StringHelper.h"
 
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #endif
-using namespace HawtC3::IO::System;
-using namespace HawtC3::IO::IO;
-using namespace HawtC3::IO::Log;
+using namespace Qahse::IO::System;
+using namespace Qahse::IO::IO;
+using namespace Qahse::IO::Log;
+
 
 // #define  EIGEN_USE_MKL_ALL// 已移至项目预处理器定义 (vcxproj)
 
@@ -100,54 +102,48 @@ static void signalHandler(int sig) {
 //#define EIGEN_USE_CUDA  //使用CUDA加速
 int main(int argc, char *argv[])
 {
+
+
 #ifdef _WIN32
     // Force UTF-8 console code page so UTF-8 literals print correctly on Windows.
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
+    SetUnhandledExceptionFilter(CrashFilter);
 #endif
     std::setlocale(LC_ALL, ".UTF-8");
-
-    LogHelper::DisplayInformation();
-
-    std::printf("你好，世界！\n");
-    Console::SetTitle("HawtC3 Sim");
-    Console::WriteLine("按回车键继续...", ConsoleColor::Red);
-    Console::WriteLine("Hello, World! Press Enter to continue...", ConsoleColor::Green);
-    Console::ResetColor();
-
-    Eigen::Matrix3d R = Eigen::Matrix3d::Identity();
-    Console::WriteLine(R);
-
-    TimesHelper::Tic();
-
-    auto ps=TimesHelper::Toc(true,true, "ms");
-
-
-
-
-    Console::WriteLine(TimesHelper::GetTime("CH"), ConsoleColor::Yellow);
-
-    Console::ResetColor();
-    auto mm =std::strtod(Console::ReadLine().c_str(), nullptr);
-    
-
-
-    // Install signal handlers
     std::signal(SIGSEGV, signalHandler);
     std::signal(SIGABRT, signalHandler);
     std::signal(SIGFPE, signalHandler);
-#ifdef _WIN32
-    SetUnhandledExceptionFilter(CrashFilter);
-#endif
 
-    // Ultra-early crash detection log
+    //初始化Log系统，防止log输出崩溃时无法记录日志
+    LogHelper::DisplayInformation();
+
+    if(argc == 1)
     {
-        std::ofstream earlyLog("E:\\Qahse\\Qahse\\main_debug.log", std::ios::trunc);
-        earlyLog << "main() entered, argc=" << argc << std::endl;
-        for (int i = 0; i < argc; i++)
-            earlyLog << "  argv[" << i << "]=" << argv[i] << std::endl;
-        earlyLog.flush();
+
+        LogHelper::WriteLogO ( "Qahse Command Line Interface (CLI) - Version 1.0" );
+        LogHelper::WriteLogO ( "Usage: Qahse [options]" );
+        LogHelper::WriteLogO ( "Options:" );
+        LogHelper::WriteLogO ( "  --test                 Run QFEM tests and exit" );
+        LogHelper::WriteLogO ( "  --linearize <file.lin> Run linearization from .lin file, no GUI" );
+        LogHelper::WriteLogO (  "  --qwd <file.qwd>      Run standalone wind mode from .qwd file" );
+        LogHelper::WriteLogO (  "  --qod <file.qod>      Run standalone ocean mode from .qod file" );
+        LogHelper::WriteLogO (  "  --pcsl <input_file>   Run PCSL cross-section analysis from input file" );
+        LogHelper::WriteLogO ( "  --run <file.trb|file.sim> [options]  Run simulation from definition file, no GUI" );
+
+        //对argc, char *argv进行赋值
+        Console::Write(" >");
+        auto cmds = StringHelper::Split(Console::ReadLine(),' ');
+        argc = cmds.size()+1;
+        argv = new char*[argc];
+        for (size_t i = 1; i < argc; i++)
+        {
+            argv[i] = new char[cmds[i-1].size() + 1];
+            std::strcpy(argv[i], cmds[i-1].c_str());       
+        }
+        
     }
+
 
     // If --test is passed, run QFEM tests and exit without starting the GUI.
     for (int i = 1; i < argc; i++) {
@@ -169,12 +165,12 @@ int main(int argc, char *argv[])
             if (!AttachConsole(ATTACH_PARENT_PROCESS)) {
                 AllocConsole();
             }
-            FILE* fDummy;
-            freopen_s(&fDummy, "CONOUT$", "w", stdout);
-            freopen_s(&fDummy, "CONOUT$", "w", stderr);
-            freopen_s(&fDummy, "CONIN$",  "r", stdin);
-            std::cout.clear();
-            std::cerr.clear();
+            // FILE* fDummy;
+            // freopen_s(&fDummy, "CONOUT$", "w", stdout);
+            // freopen_s(&fDummy, "CONOUT$", "w", stderr);
+            // freopen_s(&fDummy, "CONIN$",  "r", stdin);
+            // std::cout.clear();
+            // std::cerr.clear();
 #endif
             if (i + 1 >= argc) {
                 std::cerr << "Usage: Qahse --linearize <file.lin>" << std::endl;
@@ -200,12 +196,12 @@ int main(int argc, char *argv[])
             if (!AttachConsole(ATTACH_PARENT_PROCESS)) {
                 AllocConsole();
             }
-            FILE* fDummy;
-            freopen_s(&fDummy, "CONOUT$", "w", stdout);
-            freopen_s(&fDummy, "CONOUT$", "w", stderr);
-            freopen_s(&fDummy, "CONIN$",  "r", stdin);
-            std::cout.clear();
-            std::cerr.clear();
+            // FILE* fDummy;
+            // freopen_s(&fDummy, "CONOUT$", "w", stdout);
+            // freopen_s(&fDummy, "CONOUT$", "w", stderr);
+            // freopen_s(&fDummy, "CONIN$",  "r", stdin);
+            // std::cout.clear();
+            // std::cerr.clear();
 #endif
             if (i + 1 >= argc) {
                 std::cerr << "Usage: Qahse --qwd <file.qwd>" << std::endl;
@@ -234,12 +230,12 @@ int main(int argc, char *argv[])
             if (!AttachConsole(ATTACH_PARENT_PROCESS)) {
                 AllocConsole();
             }
-            FILE* fDummy;
-            freopen_s(&fDummy, "CONOUT$", "w", stdout);
-            freopen_s(&fDummy, "CONOUT$", "w", stderr);
-            freopen_s(&fDummy, "CONIN$",  "r", stdin);
-            std::cout.clear();
-            std::cerr.clear();
+            // FILE* fDummy;
+            // freopen_s(&fDummy, "CONOUT$", "w", stdout);
+            // freopen_s(&fDummy, "CONOUT$", "w", stderr);
+            // freopen_s(&fDummy, "CONIN$",  "r", stdin);
+            // std::cout.clear();
+            // std::cerr.clear();
 #endif
             if (i + 1 >= argc) {
                 std::cerr << "Usage: Qahse --qod <file.qod>" << std::endl;
@@ -260,7 +256,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    // --pcsl <folder> [--etype Q4|Q8|Q8R|T6]
+    // --pcsl <input_filepath>
     // 独立截面分析模式: PCSL 截面刚度/质量矩阵计算
     for (int i = 1; i < argc; i++) {
         if (std::strcmp(argv[i], "--pcsl") == 0) {
@@ -268,31 +264,39 @@ int main(int argc, char *argv[])
             if (!AttachConsole(ATTACH_PARENT_PROCESS)) {
                 AllocConsole();
             }
-            FILE* fDummy;
-            freopen_s(&fDummy, "CONOUT$", "w", stdout);
-            freopen_s(&fDummy, "CONOUT$", "w", stderr);
-            freopen_s(&fDummy, "CONIN$",  "r", stdin);
-            std::cout.clear();
-            std::cerr.clear();
+            // FILE* fDummy;
+            // freopen_s(&fDummy, "CONOUT$", "w", stdout);
+            // freopen_s(&fDummy, "CONOUT$", "w", stderr);
+            // freopen_s(&fDummy, "CONIN$",  "r", stdin);
+            // std::cout.clear();
+            // std::cerr.clear();
 #endif
             if (i + 1 >= argc) {
-                std::cerr << "Usage: Qahse --pcsl <input_folder> [--etype Q4|Q8|Q8R|T6]" << std::endl;
+                std::cerr << "Usage: Qahse --pcsl <input_filepath>" << std::endl;
                 return 1;
             }
-            std::string folder = argv[i + 1];
-            std::string etype;
-            for (int j = i + 2; j < argc - 1; j++) {
-                if (std::strcmp(argv[j], "--etype") == 0) {
-                    etype = argv[j + 1];
-                    j++;
+            std::string filepath = argv[i + 1];
+#ifdef _WIN32
+            // argv uses ACP (e.g. GBK) but setlocale(".UTF-8") makes file APIs expect UTF-8.
+            // Convert ACP → wide → UTF-8 using kernel32 APIs (always implicitly linked).
+            {
+                int wlen = MultiByteToWideChar(CP_ACP, 0, argv[i + 1], -1, nullptr, 0);
+                if (wlen > 0) {
+                    std::wstring ws(wlen - 1, L'\0');
+                    MultiByteToWideChar(CP_ACP, 0, argv[i + 1], -1, &ws[0], wlen);
+                    int u8len = WideCharToMultiByte(CP_UTF8, 0, ws.c_str(), -1, nullptr, 0, nullptr, nullptr);
+                    if (u8len > 0) {
+                        filepath.resize(u8len - 1);
+                        WideCharToMultiByte(CP_UTF8, 0, ws.c_str(), -1, &filepath[0], u8len, nullptr, nullptr);
+                    }
                 }
             }
-            int result = PCSL::RunPcslFromFolder(folder, etype);
+#endif
+            int result = PCSL::RunPcslFromFile(filepath);
             std::cout.flush();
             std::cerr.flush();
             fflush(stdout);
             fflush(stderr);
-            _Exit(result);
         }
     }
 
@@ -305,12 +309,12 @@ int main(int argc, char *argv[])
             if (!AttachConsole(ATTACH_PARENT_PROCESS)) {
                 AllocConsole();
             }
-            FILE* fDummy;
-            freopen_s(&fDummy, "CONOUT$", "w", stdout);
-            freopen_s(&fDummy, "CONOUT$", "w", stderr);
-            freopen_s(&fDummy, "CONIN$",  "r", stdin);
-            std::cout.clear();
-            std::cerr.clear();
+            // FILE* fDummy;
+            // freopen_s(&fDummy, "CONOUT$", "w", stdout);
+            // freopen_s(&fDummy, "CONOUT$", "w", stderr);
+            // freopen_s(&fDummy, "CONIN$",  "r", stdin);
+            // std::cout.clear();
+            // std::cerr.clear();
 #endif
             if (i + 1 >= argc) {
                 std::cerr << "Usage: Qahse --run <file.trb|file.sim> [--wind <m/s>] [--steps <N>] [--dt <s>] [--rpm <rpm>]"

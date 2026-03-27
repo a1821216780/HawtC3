@@ -6,7 +6,7 @@
 #include <Eigen/Dense>
 #include "../../../src/IO/IO/Extensions.h"
 
-using namespace HawtC3::IO::IO;
+using namespace Qahse::IO::IO;
 
 // ============================================================================
 // Matrix Max (double)

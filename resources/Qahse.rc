@@ -1,16 +1,16 @@
-// HawtC3.rc  –  Windows resource script
-// Embeds version information and application icon into HawtC3.exe
+// Qahse.rc  –  Windows resource script
+// Embeds version information and application icon into Qahse.exe
 //
-// Build:  rc.exe /fo build\HawtC3.res src\HawtC3.rc
-// Then link build\HawtC3.res together with the object files.
+// Build:  rc.exe /fo build\Qahse.res src\Qahse.rc
+// Then link build\Qahse.res together with the object files.
 
 #include <winver.h>
 #include "src\version.h"
 
 // ─── Application Icon ────────────────────────────────────
-// Place your .ico file at src\HawtC3.ico (or adjust the path below).
+// Place your .ico file at src\Qahse.ico (or adjust the path below).
 // IDI_ICON1 is the main icon shown in Explorer / taskbar.
-IDI_ICON1  ICON  "resources\\HawtC3.ico"
+IDI_ICON1  ICON  "resources\\Qahse.ico"
 
 // ─── Version Information Block ───────────────────────────
 VS_VERSION_INFO VERSIONINFO

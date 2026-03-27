@@ -5,7 +5,7 @@
 #include <thread>
 #include "../../../src/IO/IO/TimesHelper.h"
 
-using namespace HawtC3::IO::IO;
+using namespace Qahse::IO::IO;
 
 // ============================================================================
 // GetCurrentYear / GetCurrentMonth / GetCurrentHour / GetCurrentMinute

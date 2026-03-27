@@ -9,6 +9,7 @@
 #include <windows.h>
 #endif
 
+#define _DEBUG
 
 int main(int argc, char** argv) {
 

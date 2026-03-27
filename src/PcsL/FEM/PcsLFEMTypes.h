@@ -3,7 +3,7 @@
 // LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,赵子祯
 //
-//    This file is part of HawtC3.IO.Math
+//    This file is part of Qahse.IO.Math
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@
 #include <cmath>
 
 /// @brief 基于有限元方法的截面特性计算方法命名空间
-namespace HawtC3::PcsL::FEM
+namespace Qahse::PcsL::FEM
 {
 
     /// @brief 2D有限元分析的支持单元类型
@@ -140,7 +140,7 @@ namespace HawtC3::PcsL::FEM
         // ================= 输入数据 =================
         Eigen::MatrixXd nl_2d;    ///< (节点数量, 3)：[全局节点id, x, y]，节点坐标表
         Eigen::MatrixXi el_2d;    ///< (单元数量, 1+单元节点数): [内部id, n1, n2, ...]，单元连通性表
-        Eigen::MatrixXi emat;     ///< (单元数量, 4): [元素标签, 材料id, 纤维角度, 纤维平面角度]，单元材料属性
+        Eigen::MatrixXd emat;     ///< (单元数量, 4): [元素标签, 材料id, 纤维角度, 纤维平面角度]，单元材料属性
         Eigen::MatrixXd matprops; ///< (材料数量, 10): E1 E2 E3 G12 G13 G23 nu12 nu13 nu23 rho，材料属性表
 
         int ne_2d = 0;    ///< 单元总数
@@ -170,8 +170,9 @@ namespace HawtC3::PcsL::FEM
     /// @brief 截面刚度与质量矩阵结构体
     struct PcsLConstitutive
     {
-        Eigen::Matrix<double, 6, 6> Ks; ///< 6x6 截面刚度矩阵
-        Eigen::Matrix<double, 6, 6> Ms; ///< 6x6 截面质量矩阵
+        Eigen::Matrix<double, 6, 6> Ks;        ///< 6x6 截面刚度矩阵（可能已变换到剪切中心）
+        Eigen::Matrix<double, 6, 6> Ks_origin;  ///< 6x6 截面刚度矩阵（原点处，与BECAS一致）
+        Eigen::Matrix<double, 6, 6> Ms;         ///< 6x6 截面质量矩阵
     };
 
     /// @brief 截面属性结构体

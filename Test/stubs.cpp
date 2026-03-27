@@ -14,7 +14,7 @@ namespace internal {
 }
 }
 
-namespace HawtC3 {
+namespace Qahse {
 namespace IO {
 namespace Log {
 
@@ -67,4 +67,4 @@ namespace Log {
 
 } // namespace Log
 } // namespace IO
-} // namespace HawtC3
+} // namespace Qahse

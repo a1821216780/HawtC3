@@ -3,7 +3,7 @@
 // LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,赵子祯
 //
-//    This file is part of HawtC3.IO.Math
+//    This file is part of Qahse.IO.Math
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@
 #include <Eigen/Sparse>
 #include <vector>
 
-namespace HawtC3::PcsL::FEM
+namespace Qahse::PcsL::FEM
 {
 
     using SpMat = Eigen::SparseMatrix<double>; ///< 稀疏矩阵类型，用于全局刚度/质量等矩阵

@@ -3,7 +3,7 @@
 #include <cmath>
 #include "../../../src/IO/Yaml/YamlTypeConverter.h"
 
-using namespace HawtC3::IO::Yaml;
+using namespace Qahse::IO::Yaml;
 
 // ============================================================================
 // YmlToBool

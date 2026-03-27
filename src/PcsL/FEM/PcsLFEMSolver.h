@@ -3,7 +3,7 @@
 // LICENSING
 // Copyright(C) 2021, 2025  TG Team,Key Laboratory of Jiangsu province High-Tech design of wind turbine,WTG,WL,赵子祯
 //
-//    This file is part of HawtC3.IO.Math
+//    This file is part of Qahse.IO.Math
 //
 // Licensed under the Boost Software License - Version 1.0 - August 17th, 2003
 // you may not use this file except in compliance with the License.
@@ -35,22 +35,33 @@
 #include "PcsLFEMElements.h"
 #include "PcsLFEMAssembly.h"
 
-
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
 
-using namespace HawtC3::IO::Log;
+using namespace Qahse::IO::Log;
 
-namespace HawtC3::PcsL::FEM
+namespace Qahse::PcsL::FEM
 {
 
-    // 稀疏矩阵类型定义，便于后续代码书写
+    /**
+     * @brief 稀疏矩阵类型定义（double型）
+     * @details 用于全局刚度、质量等大规模稀疏矩阵的存储与运算
+     */
     using SpMat = Eigen::SparseMatrix<double>;
+    /**
+     * @brief 6×6实数矩阵类型定义
+     * @details 用于截面刚度、质量、柔度等6自由度相关矩阵
+     */
     using Mat6 = Eigen::Matrix<double, 6, 6>;
 
-    /// @brief Schur分解结果结构体
-    /// @details 存储截面刚度矩阵及求解过程中用到的中间变量
+    /**
+     * @brief Schur分解结果结构体
+     * @details 存储截面刚度矩阵及求解过程中用到的中间变量
+     * @var Ks 6x6 截面刚度矩阵，反映截面整体刚度特性
+     * @var w  求解得到的主未知量（位移/广义力）
+     * @var dw 求解得到的辅助未知量（约束相关变量）
+     */
     struct SchurResult
     {
         Eigen::Matrix<double, 6, 6> Ks; ///< 6x6 截面刚度矩阵，反映截面整体刚度特性
@@ -65,6 +76,12 @@ namespace HawtC3::PcsL::FEM
      * @param H   耦合块（N×N稀疏矩阵）
      * @param G22 质量/约束块（N×N稀疏矩阵）
      * @return SchurResult结构体，含6x6截面刚度矩阵Ks及主/辅助未知量
+     *
+     * @par 使用示例
+     * @code
+     * SchurResult res = SolveSchur(K11, H, G22);
+     * std::cout << res.Ks << std::endl;
+     * @endcode
      */
     inline SchurResult SolveSchur(const SpMat &K11,
                                   const SpMat &H,
@@ -106,7 +123,6 @@ namespace HawtC3::PcsL::FEM
 
         // 组装6x6柔度矩阵Fs
         Eigen::MatrixXd Fs = w.transpose() * (K11w + Htdw) + dw.transpose() * (Hw + G22dw);
-
         // 结果写入结构体
         SchurResult res;
         res.Ks = Fs.inverse(); // 柔度矩阵求逆得到刚度矩阵
@@ -114,8 +130,19 @@ namespace HawtC3::PcsL::FEM
         res.dw = dw;           // 辅助变量
         return res;
     }
-    // Build 6x6 material constitutive matrix in PCSL ordering
-    // Input: matprops row for the material (E1 E2 E3 G12 G13 G23 nu12 nu13 nu23)
+    /**
+     * @brief 构建材料的6×6本构刚度矩阵（PCSL顺序）
+     * @details 输入材料属性向量（E1 E2 E3 G12 G13 G23 nu12 nu13 nu23），输出PCSL顺序的6×6刚度矩阵。
+     * @param mp 材料属性向量（长度9，依次为E1 E2 E3 G12 G13 G23 nu12 nu13 nu23）
+     * @return 6×6本构刚度矩阵（PCSL顺序）
+     *
+     * @par 使用示例
+     * @code
+     * Eigen::VectorXd mp(9);
+     * mp << 40e9, 10e9, 10e9, 4e9, 4e9, 3e9, 0.3, 0.3, 0.3;
+     * Mat6 Q = BuildConstitutiveMatrix(mp);
+     * @endcode
+     */
     inline Mat6 BuildConstitutiveMatrix(const Eigen::VectorXd &mp)
     {
         double E1 = mp(0), E2 = mp(1), E3 = mp(2);
@@ -149,8 +176,19 @@ namespace HawtC3::PcsL::FEM
         return Qr;
     }
 
-    // Rotate for layer orientation (fiber angle)
-    // Direct port of PcsL_ElemRotateLayer symbolically generated code
+    /**
+     * @brief 针对铺层纤维角对本构矩阵进行旋转
+     * @details 直接移植自PcsL_ElemRotateLayer的符号代码。c=cos(θ)，s=sin(θ)，θ为纤维角（弧度）。
+     * @param Qm 原始本构矩阵
+     * @param c  cos(纤维角)
+     * @param s  sin(纤维角)
+     * @return 旋转后的本构矩阵
+     *
+     * @par 使用示例
+     * @code
+     * Mat6 Qr = RotateLayer(Q, std::cos(theta), std::sin(theta));
+     * @endcode
+     */
     inline Mat6 RotateLayer(const Mat6 &Qm, double c, double s)
     {
         Mat6 Qp;
@@ -257,8 +295,19 @@ namespace HawtC3::PcsL::FEM
         return Qp;
     }
 
-    // Rotate for fiber plane orientation
-    // Direct port of PcsL_ElemRotateFiberPlane symbolically generated code
+    /**
+     * @brief 针对纤维面方向对本构矩阵进行旋转
+     * @details 直接移植自PcsL_ElemRotateFiberPlane的符号代码。c=cos(θ)，s=sin(θ)，θ为纤维面角（弧度）。
+     * @param Qm 原始本构矩阵
+     * @param c  cos(纤维面角)
+     * @param s  sin(纤维面角)
+     * @return 旋转后的本构矩阵
+     *
+     * @par 使用示例
+     * @code
+     * Mat6 Qf = RotateFiberPlane(Q, std::cos(theta), std::sin(theta));
+     * @endcode
+     */
     inline Mat6 RotateFiberPlane(const Mat6 &Qm, double c, double s)
     {
         Mat6 Qf;
@@ -365,8 +414,16 @@ namespace HawtC3::PcsL::FEM
         return Qf;
     }
 
-    // Compute rotated constitutive matrices and densities for all elements
-    // Port of PcsL_RotateElementMaterialConstMatrix
+    /**
+     * @brief 计算所有单元的旋转本构矩阵和密度
+     * @details 对每个单元，按材料属性和铺层/纤维角依次旋转，得到最终本构矩阵和密度。
+     * @param u FEM全局数据结构体（输入输出）
+     *
+     * @par 使用示例
+     * @code
+     * ComputeAllConstitutiveMatrices(u);
+     * @endcode
+     */
     inline void ComputeAllConstitutiveMatrices(PcsLUtils &u)
     {
         u.Q.resize(u.ne_2d);
@@ -396,7 +453,18 @@ namespace HawtC3::PcsL::FEM
         }
     }
 
-    // Translation matrix for cross-section (port of PcsL_CrossSectionTranslationMatrix)
+    /**
+     * @brief 截面刚度/质量矩阵的平移变换矩阵
+     * @details 用于将截面刚度/质量矩阵从原点平移到任意点(px, py)
+     * @param px x方向平移量
+     * @param py y方向平移量
+     * @return 6×6平移变换矩阵
+     *
+     * @par 使用示例
+     * @code
+     * Mat6 T = TranslationMatrix(1.0, 0.5);
+     * @endcode
+     */
     inline Mat6 TranslationMatrix(double px, double py)
     {
         Mat6 T = Mat6::Identity();
@@ -407,7 +475,17 @@ namespace HawtC3::PcsL::FEM
         return T;
     }
 
-    // Rotation matrix for cross-section (port of PcsL_CrossSectionRotationMatrix)
+    /**
+     * @brief 截面刚度/质量矩阵的旋转变换矩阵
+     * @details 用于将截面刚度/质量矩阵绕原点旋转alpha_deg角度（度）
+     * @param alpha_deg 旋转角度（度）
+     * @return 6×6旋转变换矩阵
+     *
+     * @par 使用示例
+     * @code
+     * Mat6 R = RotationMatrix(30.0);
+     * @endcode
+     */
     inline Mat6 RotationMatrix(double alpha_deg)
     {
         double c = std::cos(alpha_deg * M_PI / 180.0);
@@ -426,8 +504,20 @@ namespace HawtC3::PcsL::FEM
         return R;
     }
 
-    // Transform (translate + rotate) a 6x6 cross-section matrix
-    // Port of PcsL_TransformCrossSectionMatrix
+    /**
+     * @brief 对6×6截面矩阵进行平移和旋转变换
+     * @details 先平移(px, py)，再旋转alpha_deg角度（度）。
+     * @param M 原始6×6矩阵
+     * @param px x方向平移量
+     * @param py y方向平移量
+     * @param alpha_deg 旋转角度（度）
+     * @return 变换后的6×6矩阵
+     *
+     * @par 使用示例
+     * @code
+     * Mat6 M2 = TransformCrossSectionMatrix(M, 1.0, 0.5, 30.0);
+     * @endcode
+     */
     inline Mat6 TransformCrossSectionMatrix(const Mat6 &M, double px, double py, double alpha_deg)
     {
         Mat6 T = TranslationMatrix(px, py);
@@ -436,8 +526,21 @@ namespace HawtC3::PcsL::FEM
         return R * Mt * R.transpose();
     }
 
-    // Calculate shear center and elastic center from stiffness matrix
-    // Port of PcsL_CalcShearAndElasticCenter
+    /**
+     * @brief 根据刚度矩阵计算剪切中心和弹性中心
+     * @details 通过柔度矩阵逆运算，获得截面剪切中心和弹性中心坐标
+     * @param Ks 6×6截面刚度矩阵
+     * @param ShearX 剪切中心x坐标（输出）
+     * @param ShearY 剪切中心y坐标（输出）
+     * @param ElasticX 弹性中心x坐标（输出）
+     * @param ElasticY 弹性中心y坐标（输出）
+     *
+     * @par 使用示例
+     * @code
+     * double sx, sy, ex, ey;
+     * CalcShearAndElasticCenter(Ks, sx, sy, ex, ey);
+     * @endcode
+     */
     inline void CalcShearAndElasticCenter(const Mat6 &Ks,
                                           double &ShearX, double &ShearY, double &ElasticX, double &ElasticY)
     {
@@ -454,8 +557,29 @@ namespace HawtC3::PcsL::FEM
         ElasticY = -(F(3, 2) * F(4, 4) - F(3, 4) * F(4, 2)) / denom;
     }
 
-    // Calculate mass properties from element integration
-    // Port of PcsL_CalcSectionMassProps
+    /**
+     * @brief 通过单元积分计算截面质量属性
+     * @details 累加所有单元的质量、质心、惯性矩、面积等属性，得到整体截面属性
+     * @param u FEM全局数据结构体
+     * @param Mass 总质量（输出）
+     * @param xm 质量中心x坐标（输出）
+     * @param ym 质量中心y坐标（输出）
+     * @param Ixx 绕x轴质量惯性矩（输出）
+     * @param Iyy 绕y轴质量惯性矩（输出）
+     * @param Ixy 惯性积（输出）
+     * @param AreaX 面积中心x坐标（输出）
+     * @param AreaY 面积中心y坐标（输出）
+     * @param Axx 面积惯性矩xx（输出）
+     * @param Ayy 面积惯性矩yy（输出）
+     * @param Axy 面积惯性积（输出）
+     * @param AreaTotal 总面积（输出）
+     *
+     * @par 使用示例
+     * @code
+     * double m, xm, ym, Ixx, Iyy, Ixy, Ax, Ay, Axx, Ayy, Axy, Atot;
+     * CalcSectionMassProps(u, m, xm, ym, Ixx, Iyy, Ixy, Ax, Ay, Axx, Ayy, Axy, Atot);
+     * @endcode
+     */
     inline void CalcSectionMassProps(const PcsLUtils &u,
                                      double &Mass, double &xm, double &ym,
                                      double &Ixx, double &Iyy, double &Ixy,
@@ -499,8 +623,21 @@ namespace HawtC3::PcsL::FEM
         AreaY /= AreaTotal;
     }
 
-    // Calculate orientation of principal elastic axes
-    // Port of PcsL_CalcOrientationElasticAxes
+    /**
+     * @brief 计算主弹性轴方向
+     * @details 通过特征值分解，获得参考点和弹性中心处的主轴方向角度（弧度）
+     * @param Ks 6×6截面刚度矩阵
+     * @param ElasticX 弹性中心x坐标
+     * @param ElasticY 弹性中心y坐标
+     * @param AlphaRef 参考点主轴方向（输出，弧度）
+     * @param AlphaElasticCenter 弹性中心主轴方向（输出，弧度）
+     *
+     * @par 使用示例
+     * @code
+     * double a1, a2;
+     * CalcOrientationElasticAxes(Ks, ex, ey, a1, a2);
+     * @endcode
+     */
     inline void CalcOrientationElasticAxes(const Mat6 &Ks,
                                            double ElasticX, double ElasticY,
                                            double &AlphaRef, double &AlphaElasticCenter)
@@ -526,8 +663,19 @@ namespace HawtC3::PcsL::FEM
         AlphaElasticCenter = std::atan(vecs2(1, idx1) / vecs2(0, idx1));
     }
 
-    // Compute all cross-section properties
-    // Port of PcsL_CrossSectionProps
+    /**
+     * @brief 计算所有截面属性
+     * @details 依次调用剪切/弹性中心、质量属性、主轴方向等计算，汇总为PcsLCrossSectionProps结构体
+     * @param Ks 6×6截面刚度矩阵
+     * @param u FEM全局数据结构体
+     * @return PcsLCrossSectionProps结构体，包含所有截面属性
+     *
+     * @par 使用示例
+     * @code
+     * PcsLCrossSectionProps props = ComputeCrossSectionProps(Ks, u);
+     * std::cout << props.ElasticX << std::endl;
+     * @endcode
+     */
     inline PcsLCrossSectionProps ComputeCrossSectionProps(const Mat6 &Ks, const PcsLUtils &u)
     {
         PcsLCrossSectionProps props;
