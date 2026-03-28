@@ -4,7 +4,7 @@
 #include <cmath>
 #include <vector>
 #include <Eigen/Dense>
-#include "../../src/PcsL/CLT/PcsLCLTRun.h"
+#include "../../src/PcsL/CLT/Pcs_CLT_Run.h"
 
 using namespace Qahse::PcsL;
 using namespace Qahse::PcsL::CLT;

@@ -26,7 +26,7 @@
 #include <algorithm>
 #include <Eigen/Dense>
 
-#include "../PcsL_Types.h"
+#include "../Pcs_Types.h"
 #include "../../IO/Math/LinearAlgebraHelper.h"
 #include "../../IO/Math/MathHelper.h"
 #include "../../IO/Math/InterpolateHelper.h"

@@ -26,8 +26,8 @@
 ///
 /// 基于 vtu11 库输出截面有限元网格和应力/应变/翘曲场。
 
-#include "PcsLFEMTypes.h"
-#include "PcsLFEMStress.h"
+#include "Pcs_FEM_Types.h"
+#include "Pcs_FEM_Stress.h"
 #include "../../IO/VTK/vtu11-cpp17.hpp"
 #include "../../IO/Log/LogHelper.h"
 

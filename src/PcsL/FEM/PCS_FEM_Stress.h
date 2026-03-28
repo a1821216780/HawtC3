@@ -28,9 +28,9 @@
 /// 梁坐标应变 (strain_beam)、梁坐标应力 (stress_beam)
 /// 以及纤维坐标应力 (stress_ply)。
 
-#include "PcsLFEMTypes.h"
-#include "PcsLFEMElements.h"
-#include "PcsLFEMSolver.h"
+#include "Pcs_FEM_Types.h"
+#include "Pcs_FEM_Elements.h"
+#include "Pcs_FEM_Solver.h"
 
 #include <Eigen/Dense>
 #include <vector>

@@ -21,8 +21,8 @@
 //
 //**********************************************************************************************************************************
 
-#include "PcsLFEMTypes.h"
-#include "PcsLFEMElements.h"
+#include "Pcs_FEM_Types.h"
+#include "Pcs_FEM_Elements.h"
 // Must include ChMatrix.h BEFORE Eigen/Sparse to activate EIGEN_SPARSEMATRIX_PLUGIN
 // (Chrono adds virtual methods to SparseMatrix — without this, ODR violation with
 //  other TUs that include Chrono causes crashes)

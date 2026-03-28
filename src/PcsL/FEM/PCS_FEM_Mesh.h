@@ -25,8 +25,8 @@
 /// @brief 翼型截面自动网格生成（SelfMesh=false 模式）
 ///        从翼型外形 + 铺层厚度自动构建 Q4/Q8 有限元网格
 
-#include "../PcsL_Types.h"
-#include "PcsLFEMTypes.h"
+#include "../Pcs_Types.h"
+#include "Pcs_FEM_Types.h"
 #include "../../IO/Log/LogHelper.h"
 
 #include <Eigen/Dense>

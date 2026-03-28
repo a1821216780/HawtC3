@@ -31,8 +31,8 @@
 #include <filesystem>
 #include <Eigen/Dense>
 
-#include "../PcsL_Types.h"
-#include "PcsLCLTSubs.h"
+#include "../Pcs_Types.h"
+#include "Pcs_CLT_Subs.h"
 #include "../../IO/Math/LinearAlgebraHelper.h"
 #include "../../IO/Math/MathHelper.h"
 #include "../../IO/Math/InterpolateHelper.h"

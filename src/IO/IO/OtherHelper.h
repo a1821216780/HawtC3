@@ -283,6 +283,24 @@ namespace Qahse::IO::IO
 		template <typename T>
 		static std::string Tostring(const T &message, char fg = '\t', bool coloum = true);
 
+		template <typename T>
+		struct ParseLineArgs
+		{
+			const std::vector<std::string> &lines;
+			const std::string &filename;
+			std::tuple<int, std::string> pp;
+			std::optional<T> moren = std::nullopt;
+			int num = 0;
+			char fg = ' ';
+			char fg1 = '\t';
+			int station = 0;
+			const std::vector<std::string> *namelist = nullptr;
+			bool row = false;
+			const std::string *titleLine = nullptr;
+			bool warning = true;
+			const std::string &errorInf = "";
+		};
+
 		/// <summary>
 		/// 从字符串数组中解析数据行，支持多种解析模式和错误处理
 		/// </summary>
@@ -301,14 +319,15 @@ namespace Qahse::IO::IO
 		/// <param name="warning">是否显示警告信息</param>
 		/// <param name="errorInf">自定义错误信息</param>
 		/// <returns>解析后的类型T的值</returns>
+		// template <typename T>
+		// static T ParseLine(const std::vector<std::string> &lines, const std::string &filename,
+		// 				   std::tuple<int, std::string> pp, std::optional<T> moren = std::nullopt,
+		// 				   int num = 0, char fg = ' ', char fg1 = '\t', int station = 0,
+		// 				   const std::vector<std::string> *namelist = nullptr, bool row = false,
+		// 				   const std::string *titleLine = nullptr, bool warning = true,
+		// 				   const std::string &errorInf = "");
 		template <typename T>
-		static T ParseLine(const std::vector<std::string> &lines, const std::string &filename,
-						   std::tuple<int, std::string> pp, std::optional<T> moren = std::nullopt,
-						   int num = 0, char fg = ' ', char fg1 = '\t', int station = 0,
-						   const std::vector<std::string> *namelist = nullptr, bool row = false,
-						   const std::string *titleLine = nullptr, bool warning = true,
-						   const std::string &errorInf = "");
-
+		static T ParseLine(ParseLineArgs<T> args);
 		/// <summary>
 		/// 从字符串数组中读取输出关键字
 		/// </summary>

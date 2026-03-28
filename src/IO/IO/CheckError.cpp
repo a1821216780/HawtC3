@@ -99,44 +99,7 @@ namespace Qahse::IO::IO
 		}
 	}
 
-	/**
-	 * @brief 检查指定文件路径的父目录是否存在，不存在时可选择自动创建。
-	 * @param name 文件路径。
-	 * @param createdir 是否自动创建父目录。
-	 * @details 若父目录不存在且createdir为true，则尝试自动创建。
-	 * @code
-	 * CheckError::CheckPath("./data/test.txt", true);
-	 * @endcode
-	 */
-	void CheckError::CheckPath(const std::string &name, bool createdir)
-	{
-		std::string name1 = Extensions::GetABSPath(name); ///< 获取绝对路径
-		fs::path path(name1);
-		std::string temp = path.parent_path().string(); ///< 父目录路径
-
-		if (temp.empty())
-		{
-			LogHelper::ErrorLog("文件路径：" + name1 + "文件的父文件夹为空！或路径定义错误！", "", "", 20, "CheckError::CheckPath");
-			return;
-		}
-
-		if (!fs::exists(temp))
-		{
-			LogHelper::WriteLogO("文件路径：" + temp + "没有不存在！");
-			if (createdir)
-			{
-				try
-				{
-					fs::create_directories(temp); ///< 自动创建父目录
-				}
-				catch (const std::exception &)
-				{
-					LogHelper::WarnLog("您的权限不够！", "CheckPath");
-					LogHelper::ErrorLog("文件路径：" + temp + "没有不存在,且系统权限不够，无法创建", "", "", 20, "CheckError::CheckPath");
-				}
-			}
-		}
-	}
+	
 
 	/**
 	 * @brief 检查指定目录是否存在，不存在时可选择自动创建。
@@ -221,6 +184,46 @@ namespace Qahse::IO::IO
 			LogHelper::ErrorLog("当前文件的拓展名称" + extension + " 与指定名称" +
 									extension1 + " 不同！请检查后再尝试",
 								"", "", 20, "CheckError::CheckPath");
+		}
+	}
+
+
+	/**
+	 * @brief 检查指定文件路径的父目录是否存在，不存在时可选择自动创建。
+	 * @param name 文件路径。
+	 * @param createdir 是否自动创建父目录。
+	 * @details 若父目录不存在且createdir为true，则尝试自动创建。
+	 * @code
+	 * CheckError::CheckPath("./data/test.txt", true);
+	 * @endcode
+	 */
+	void CheckError::CheckPath(const std::string &name, bool createdir)
+	{
+		std::string name1 = Extensions::GetABSPath(name); ///< 获取绝对路径
+		fs::path path(name1);
+		std::string temp = path.parent_path().string(); ///< 父目录路径
+
+		if (temp.empty())
+		{
+			LogHelper::ErrorLog("文件路径：" + name1 + "文件的父文件夹为空！或路径定义错误！", "", "", 20, "CheckError::CheckPath");
+			return;
+		}
+
+		if (!fs::exists(temp))
+		{
+			LogHelper::WriteLogO("文件路径：" + temp + "没有不存在！");
+			if (createdir)
+			{
+				try
+				{
+					fs::create_directories(temp); ///< 自动创建父目录
+				}
+				catch (const std::exception &)
+				{
+					LogHelper::WarnLog("您的权限不够！", "CheckPath");
+					LogHelper::ErrorLog("文件路径：" + temp + "没有不存在,且系统权限不够，无法创建", "", "", 20, "CheckError::CheckPath");
+				}
+			}
 		}
 	}
 

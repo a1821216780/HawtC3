@@ -1472,6 +1472,8 @@ namespace Qahse::IO::IO
 	template bool OtherHelper::AreEqual<float>(const float &, const float &, const std::vector<std::string> &);
 	template bool OtherHelper::AreEqual<std::string>(const std::string &, const std::string &, const std::vector<std::string> &);
 
+
+
 	/**
 	 * @brief 从文件行数组中解析指定行的关键字后的数据，并返回指定类型。
 	 * @tparam T             感兴数据的目标类型（int/double/float/string 等）。
@@ -1491,21 +1493,16 @@ namespace Qahse::IO::IO
 	 * @return 解析得到的目标类型对象；失败时返回默认値或 `T{}`。
 	 */
 	template <typename T>
-	T OtherHelper::ParseLine(const std::vector<std::string> &lines, const std::string &filename,
-							 std::tuple<int, std::string> pp, std::optional<T> moren,
-							 int num, char fg, char fg1, int station,
-							 const std::vector<std::string> *namelist, bool row,
-							 const std::string *titleLine, bool warning,
-							 const std::string &errorInf)
+	T OtherHelper::ParseLine(ParseLineArgs<T> args)
 	{
 		try
 		{
-			int index = std::get<0>(pp);
-			std::string key = std::get<1>(pp);
+			int index = std::get<0>(args.pp);
+			std::string key = std::get<1>(args.pp);
 
-			if (index >= 0 && index < static_cast<int>(lines.size()))
+			if (index >= 0 && index < static_cast<int>(args.lines.size()))
 			{
-				std::string line = lines[index];
+				std::string line = args.lines[index];
 
 				// 查找关键字
 				size_t keyPos = line.find(key);
@@ -1518,11 +1515,11 @@ namespace Qahse::IO::IO
 					valuePart = TrimString(valuePart);
 
 					// 按分隔符分割
-					std::vector<std::string> tokens = SplitString(valuePart, std::string(1, fg));
+					std::vector<std::string> tokens = SplitString(valuePart, std::string(1, args.fg));
 
-					if (station < static_cast<int>(tokens.size()))
+					if (args.station < static_cast<int>(tokens.size()))
 					{
-						std::string valueStr = TrimString(tokens[station]);
+						std::string valueStr = TrimString(tokens[args.station]);
 
 						// 类型转换
 						if constexpr (std::is_same_v<T, int>)
@@ -1541,6 +1538,7 @@ namespace Qahse::IO::IO
 						{
 							return valueStr;
 						}
+						
 						else
 						{
 							// 对于其他类型，尝试从字符串构造
@@ -1554,30 +1552,30 @@ namespace Qahse::IO::IO
 			}
 
 			// 解析失败，返回默认值或抛出异常
-			if (moren.has_value())
+			if (args.moren.has_value())
 			{
-				return moren.value();
+				return args.moren.value();
 			}
 			else
 			{
-				if (warning)
+				if (args.warning)
 				{
-					std::cerr << "Warning: Failed to parse line in " << filename
-							  << " for key: " << std::get<1>(pp) << '\n';
+					std::cerr << "Warning: Failed to parse line in " << args.filename
+							  << " for key: " << std::get<1>(args.pp) << '\n';
 				}
 				return T{};
 			}
 		}
 		catch (const std::exception &e)
 		{
-			if (warning)
+			if (args.warning)
 			{
-				std::cerr << "Error parsing line in " << filename << ": " << e.what() << '\n';
+				std::cerr << "Error parsing line in " << args.filename << ": " << e.what() << '\n';
 			}
 
-			if (moren.has_value())
+			if (args.moren.has_value())
 			{
-				return moren.value();
+				return args.moren.value();
 			}
 			else
 			{

@@ -21,19 +21,22 @@
 //
 //**********************************************************************************************************************************
 
-#include "StrL_Types.h"
 #include "../IO/IO/StringHelper.h"
 #include "../IO/IO/OtherHelper.h"
 #include "../IO/IO/CheckError.h"
 #include "../IO/Log/LogHelper.h"
 
-
+/// @brief 机构动力学分析相关函数的命名空间
 namespace Qahse::StrL
 {
-
+    using namespace std;
     struct StrLInput
     {
-        
+        /// @brief 当前输入文件的路径
+        string Filepath;
+
+        /// @brief 存储文件的每一行内容
+        vector<string> Lines; 
     };
-    
+
 }

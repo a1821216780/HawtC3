@@ -22,16 +22,17 @@
 //**********************************************************************************************************************************
 
 #include "chrono/core/ChMatrix.h" // MUST come before any Eigen include (EIGEN_SPARSEMATRIX_PLUGIN)
-#include "../PcsL/PcsL_Types.h"
-#include "../PcsL/PcsL_IO_Subs.h"
-#include "../PcsL/FEM/PcsLFEMTypes.h"
-#include "../PcsL/FEM/PcsLFEMSolver.h"
-#include "../PcsL/FEM/PcsLFEMAssembly.h"
-#include "../PcsL/FEM/PcsLFEMMesh.h"
-#include "../PcsL/FEM/PcsLFEMStress.h"
-#include "../PcsL/FEM/PcsLFEMVTK.h"
-#include "../PcsL/CLT/PcsLCLTRun.h"
-#include "../IO/Log/LogHelper.h"
+#include "Pcs_Types.h"
+#include "Pcs_IO_Subs.h"
+#include "FEM/Pcs_FEM_Types.h"
+#include "FEM/Pcs_FEM_Solver.h"
+#include "FEM/Pcs_FEM_Assembly.h"
+#include "FEM/Pcs_FEM_Mesh.h"
+#include "FEM/Pcs_FEM_Stress.h"
+#include "FEM/Pcs_FEM_VTK.h"
+#include "CLT/PCS_CLT_Run.h"
+#include "IO/Log/LogHelper.h"
+#include "IO/IO/OtherHelper.h"
 
 #include <filesystem>
 #include <iostream>
@@ -44,6 +45,7 @@ namespace PCSL
     using namespace Qahse::PcsL::FEM;
     using namespace Qahse::PcsL::CLT;
     using namespace Qahse::IO::Log;
+    using namespace Qahse::IO::IO;
 
     /**
      * @brief 在指定目录下查找并返回第一个 .pcs 文件的完整路径

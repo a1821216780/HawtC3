@@ -21,10 +21,27 @@
 //
 //**********************************************************************************************************************************
 
-namespace Qahse::StrL
-{
-    static StrLInput ReadStrL_MainFile()
-    {
 
-    }
-}
+
+// Physical constants
+#define PI_                     3.14159265358979323846
+#define KINVISCAIR              1.647e-05
+#define DENSITYAIR              1.225
+#define KINVISCWATER            1.307e-6
+#define DENSITYWATER            1025
+#define GRAVITY                 9.80665
+#define TINYVAL                 1.0e-10
+#define ZERO_MASS               1.0      // 原值 1e-5 导致 KKT 矩阵条件数 ~7e15, SparseQR 无法正确执行约束
+
+// Airfoil discretization parameters
+#define IQX                     302
+#define IBX                     604
+
+// Blade analysis parameters
+#define MAXBLADESTATIONS        200
+
+// Controller array sizes
+#define arraySizeTUB            550
+#define arraySizeBLADED         550
+#define arraySizeDTU            100
+

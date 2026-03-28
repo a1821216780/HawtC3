@@ -1,0 +1,47 @@
+-- =============================================================================
+-- Qahse .qwd 风场定义文件: Kaimal NTM 湍流 (IEC 61400-1 Ed.3)
+-- =============================================================================
+
+---------------------- 时间与IO定义 -------------------------------------- 
+GENERATE    MODE            - 模式: 0 GENERATE(生成) 或 1 IMPORT(导入)
+KAIMAL      WINDMODEL       - 风场模型: KAIMAL/VONKARMAN/ETM/EWM/EOG/EDC/ECD/EWS/UNIFORM
+
+---------------------- IEC 标准参数 --------------------------------------
+ED3         IECSTANDARD     - 标准版次: ED2/ED3/ED4
+I           TURBINECLASS    - 风力机等级: I/II/III
+B           TURBCLASS       - 湍流等级: A/B/C
+50.0        VREF            - 参考风速 [m/s]
+126.0       ROTORDIAMETER   - 转子直径 [m]
+
+---------------------- 基本风参数 ----------------------------------------
+11.4        MEANWINDSPEED   - 轮毂高度平均风速 [m/s]
+87.6        REFHEIGHT       - 参考高度 [m]
+PL          SHEARTYPE       - 剪切类型: PL(幂律) / LOG(对数) / NONE
+0.14        SHEAREXP        - 幂律指数
+0.01        ROUGHNESS       - 地表粗糙度 [m]
+0.0         HORANGLE        - 水平入流角 [deg]
+0.0         VERTANGLE       - 垂直入流角 [deg]
+
+---------------------- 湍流网格参数 --------------------------------------
+0           TURBINTENSITY   - 湍流强度 [%] (0=IEC NTM 自动)
+1           TURBSEED        - 随机种子
+36          GRIDPTSY        - Y 方向网格点数
+36          GRIDPTSZ        - Z 方向网格点数
+150.0       FIELDDIMY       - 风场宽度 [m]
+150.0       FIELDDIMZ       - 风场高度 [m]
+660.0       SIMTIME         - 风场时长 [s]
+0.05        TIMESTEP        - 风场时间步长 [s]
+true        CYCLEWIND       - 时域边界镜像循环
+true        THREECOMP       - 生成三分量 u,v,w
+
+
+
+---------------------- 风文件生成算法 -------------------------------------
+AUTO        GENMETHOD       - 算法: SRM(快速)/VEERS(经典)/AUTO(自动)
+true        USEFFT          - 使用 MKL FFT 加速
+TRILINEAR   INTERPMETHOD    - 插值方法: TRILINEAR(三线性)/CUBIC(三次)
+
+---------------------- 输出控制 -------------------------------------
+./result    SAVEPATH        - 输出路径 (相对当前 .qwd 目录)
+true        SUMPRINT        - 打印摘要
+

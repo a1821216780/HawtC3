@@ -31,9 +31,9 @@
 #include <cmath>
 
 #include "../../IO/Log/LogHelper.h"
-#include "PcsLFEMTypes.h"
-#include "PcsLFEMElements.h"
-#include "PcsLFEMAssembly.h"
+#include "Pcs_FEM_Types.h"
+#include "Pcs_FEM_Elements.h"
+#include "Pcs_FEM_Assembly.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
